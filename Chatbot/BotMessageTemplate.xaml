@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Chatbot.BotMessageTemplate"
+             xmlns:local="clr-namespace:Chatbot"
+             x:DataType="local:Message"
+             ColumnDefinitions="2*, *">
+    <Border
+        x:Name="borderText"
+        Grid.Column="0"
+        Padding="10"
+        StrokeShape="RoundRectangle 10"
+        >
+        <Grid
+            Padding="2"
+            VerticalOptions="Center"
+            ColumnDefinitions="30, *"
+            RowDefinitions="Auto, *, *"
+            ColumnSpacing="10">
+            <Grid
+                Grid.Row="0"
+                Grid.Column="1"
+                ColumnDefinitions="Auto, *"
+                IsVisible="{Binding PluginInvoked}">
+                <Border
+                    StrokeShape="RoundRectangle 30"
+                    Stroke="LightSkyBlue"
+                    Background="LightSkyBlue">
+                    <Label 
+                        Margin="10"
+                        Text="{Binding PluginUsage}" 
+                        Grid.Column="0"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"/>
+                </Border>
+            </Grid>
+            <Image
+                Grid.Column="0"
+                Grid.Row="1"
+                HeightRequest="30"
+                Source="bot.png"
+                WidthRequest="30" 
+                HorizontalOptions="Center"
+                VerticalOptions="Start"/>
+            <Label
+                Grid.Column="1"
+                Grid.Row="1"
+                Padding="2"
+                LineBreakMode="WordWrap"
+                Text="{Binding Content}" />
+        </Grid>
+    </Border>
+</Grid>

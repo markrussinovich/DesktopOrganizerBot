@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Chatbot"
+             x:DataType="local:ChatHistoryViewModel"
+             x:Class="Chatbot.MainPage"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="UserMessageTemplate">
+            <local:UserMessageTemplate />
+        </DataTemplate>
+        <DataTemplate x:Key="BotMessageTemplate">
+            <local:BotMessageTemplate />
+        </DataTemplate>
+        <local:MessageTemplateSelector 
+            x:Key="MessageTemplateSelector"
+            UserMessageTemplate="{StaticResource UserMessageTemplate}"
+            BotMessageTemplate="{StaticResource BotMessageTemplate}" />
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="50,*,50" RowSpacing="10" Padding="10">
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="Auto, Auto"
+            HorizontalOptions="End"
+            ColumnSpacing="10">
+            <Button 
+                Grid.Column="1"
+                HeightRequest="30"
+                Text="Clear Chat" 
+                Command="{Binding ClearMessagesCommand}" />
+            <Button 
+                Grid.Column="0"
+                HeightRequest="30"
+                Text="Backup" 
+                Command="{Binding BackupCommand}" />
+        </Grid>
+
+        <Grid
+            Grid.Row="1">
+            <CollectionView
+                    Grid.Row="1"
+                    x:Name="chatHistoryCollectionView"
+                    ItemTemplate="{StaticResource MessageTemplateSelector}"
+                    ItemsSource="{Binding Messages}" 
+                    BackgroundColor="AliceBlue"
+                    ChildAdded="OnMessageAdded">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout
+                            ItemSpacing="5"
+                            Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </Grid>
+
+        <Grid
+            Grid.Row="2"
+            ColumnDefinitions="*, 60"
+            ColumnSpacing="10"
+            >
+            <Entry
+                Grid.Column="0"
+                Placeholder="Enter text"
+                Text="{Binding Text}"
+                IsReadOnly="{Binding ProcessingBotResponse}"
+                ReturnCommand="{Binding SubmitCommand}"/>
+            <Button
+                Grid.Column="1"
+                ImageSource="send.png"
+                WidthRequest="60"
+                HeightRequest="60"
+                Padding="15"
+                Background="White"
+                Command="{Binding SubmitCommand}"
+                IsVisible="{Binding CanSubmit}"
+                IsEnabled="{Binding CanSubmit}"
+                />
+            <Grid
+                Grid.Column="1"
+                WidthRequest="60"
+                HeightRequest="60"
+                Padding="10">
+                <Image
+                    Source="processing.gif"
+                    IsAnimationPlaying="True"
+                    IsVisible="{Binding ProcessingBotResponse}"
+                    />
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>
+
+    

@@ -1,0 +1,39 @@
+﻿
+POST http://localhost:5272/v1/chat/completions HTTP/1.1
+content-type: application/json
+
+{
+    "model": "phi-3-mini-q4",
+    "messages": [
+      {"role": "user", "content": "why the sky is blue?"}
+  ],
+  "temperature":0.7,
+  "max_tokens": 100,
+  "top_p": 0.4,
+  "stream": false
+}
+
+###
+
+POST http://localhost:5272/v1/chat/completions HTTP/1.1
+content-type: application/json
+
+{
+    "model": "phi-3-mini-q4",
+    "messages": [
+      {"role": "system", "content": "You are a helpful assistant"},
+      {"role": "user", "content": "why is the sky blue?"}
+  ]
+}
+
+###
+POST http://localhost:5272/v1/chat/completions HTTP/1.1
+content-type: application/json
+
+{
+    "model": "phi-3-mini",
+    "messages": [
+      {"role": "system", "content": "You are a helpful assistant"},
+      {"role": "user", "content": "why is the sky blue?"}
+  ]
+}

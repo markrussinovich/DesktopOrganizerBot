@@ -1,0 +1,16 @@
+AIServer
+ChatbotAPP
+gRPCClient
+server
+WPFApp
+.editorconfig
+
+bin
+debug
+obj
+packages
+.vs
+.vscode
+
+LocalModelRunSever
+/VS7A9665A4.Roslyn.AlwaysActivateInProcLanguageClient.1.BVZZ.1.svclog
